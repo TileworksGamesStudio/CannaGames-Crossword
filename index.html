@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Crossword</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Botanical Background System -->
+  <div class="luxury-bg" aria-hidden="true">
+    <div class="bg-base"></div>
+    <div class="bg-pinstripe"></div>
+    <div class="bg-micro-texture"></div>
+    <div class="bg-icon-stage" id="bg-icon-stage"></div>
+  </div>
+
+  <div class="app-viewport">
+    <!-- Application Shell Header -->
+    <header class="site-header" id="site-header">
+      <div class="header-left">
+        <button type="button" class="btn-home" id="btn-header-home" aria-label="Home" title="Return to Portal">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </button>
+        <span class="game-header-title">Crossword</span>
+      </div>
+
+      <!-- Live Header Meta (Timer & In-game controls when solving) -->
+      <div class="header-right" id="header-game-meta">
+        <span id="game-timer" class="game-timer-badge" aria-label="Elapsed Time">00:00</span>
+        <button type="button" class="btn-utility-icon" id="btn-game-help" aria-label="Game Rules" title="Rules">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN MENU SCREEN -->
+    <section id="screen-menu" class="screen screen-menu-wrap" aria-label="Main Menu">
+      <div class="menu-center-column">
+        <!-- Daily Release & Tier Selector Hero -->
+        <div class="daily-hero-badge">
+          <span class="hero-date-pill" id="daily-date-label">Synchronizing release...</span>
+          <div class="hero-tier-pills" id="daily-tier-selector" role="group" aria-label="Select Daily Tier"></div>
+        </div>
+
+        <!-- 4 Primary Menu Actions -->
+        <div class="primary-actions-group">
+          <!-- Button 1: Play Dynamic Game -->
+          <button type="button" class="menu-btn menu-btn-primary" id="btn-play-game">
+            <span class="btn-inner">
+              <span class="btn-text" id="btn-play-label">Play Crossword</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </span>
+          </button>
+
+          <!-- Button 2: Vault -->
+          <button type="button" class="menu-btn menu-btn-secondary" id="btn-menu-vault">
+            <span class="btn-inner">
+              <span class="btn-text">Vault</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </span>
+          </button>
+
+          <!-- Button 3: Settings -->
+          <button type="button" class="menu-btn menu-btn-secondary" id="btn-menu-settings">
+            <span class="btn-inner">
+              <span class="btn-text">Settings</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </span>
+          </button>
+
+          <!-- Button 4: How to Play -->
+          <button type="button" class="menu-btn menu-btn-secondary" id="btn-menu-help">
+            <span class="btn-inner">
+              <span class="btn-text">How to Play</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <!-- 3 Utility Buttons at Viewport Horizontal Centerline -->
+        <div class="bottom-utility-row" aria-label="Game Utilities">
+          <button type="button" class="utility-icon-btn" id="btn-util-stats" aria-label="Player Statistics" title="Player Statistics">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </button>
+          <button type="button" class="utility-icon-btn" id="btn-util-share" aria-label="Share Game" title="Share Crossword">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+          <button type="button" class="utility-icon-btn" id="btn-util-plus" aria-label="Reserved Extension" title="More Games">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMEPLAY SCREEN -->
+    <section id="screen-game" class="screen screen-gameplay hidden" aria-label="Crossword Grid Play">
+      <!-- Gameplay Context Bar -->
+      <div class="gameplay-subnav">
+        <button type="button" class="btn-subnav-back" id="btn-game-back" aria-label="Return to Main Menu">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          <span>Menu</span>
+        </button>
+        <span id="game-active-title" class="gameplay-active-title">Daily Puzzle</span>
+        <div class="game-tier-pills" id="game-tier-tabs" role="tablist" aria-label="Tier Selection"></div>
+      </div>
+
+      <!-- Spatial Layout: Clue Bar Above Grid -->
+      <div class="active-clue-bar" id="active-clue-trigger" role="button" tabindex="0" aria-label="Active Clue. Tap to toggle Across/Down">
+        <span id="active-clue-badge" class="clue-badge">--</span>
+        <p id="active-clue-text" class="clue-text">Tap any cell to start solving.</p>
+      </div>
+
+      <!-- Spatial Layout: Board in Center -->
+      <div class="gameplay-center-stage">
+        <div class="board-container">
+          <div id="crossword-board" class="crossword-grid" role="grid" aria-label="Crossword Grid"></div>
+        </div>
+      </div>
+
+      <!-- Spatial Layout: Supporting Controls Below Board -->
+      <div class="gameplay-footer-deck">
+        <!-- Desktop / Wide Screen Split Clues Panel -->
+        <div class="clues-split-panel" id="clues-panel">
+          <div class="clues-col">
+            <h3 class="clues-heading">Across</h3>
+            <ol id="clues-list-across" class="clue-list-scroll"></ol>
+          </div>
+          <div class="clues-col">
+            <h3 class="clues-heading">Down</h3>
+            <ol id="clues-list-down" class="clue-list-scroll"></ol>
+          </div>
+        </div>
+
+        <!-- Mobile-first On-screen Tactile Keyboard -->
+        <div class="onscreen-keyboard" id="onscreen-keyboard" aria-label="Virtual Keyboard">
+          <div class="kb-row">
+            <button type="button" class="kb-key" data-key="Q">Q</button>
+            <button type="button" class="kb-key" data-key="W">W</button>
+            <button type="button" class="kb-key" data-key="E">E</button>
+            <button type="button" class="kb-key" data-key="R">R</button>
+            <button type="button" class="kb-key" data-key="T">T</button>
+            <button type="button" class="kb-key" data-key="Y">Y</button>
+            <button type="button" class="kb-key" data-key="U">U</button>
+            <button type="button" class="kb-key" data-key="I">I</button>
+            <button type="button" class="kb-key" data-key="O">O</button>
+            <button type="button" class="kb-key" data-key="P">P</button>
+          </div>
+          <div class="kb-row">
+            <button type="button" class="kb-key" data-key="A">A</button>
+            <button type="button" class="kb-key" data-key="S">S</button>
+            <button type="button" class="kb-key" data-key="D">D</button>
+            <button type="button" class="kb-key" data-key="F">F</button>
+            <button type="button" class="kb-key" data-key="G">G</button>
+            <button type="button" class="kb-key" data-key="H">H</button>
+            <button type="button" class="kb-key" data-key="J">J</button>
+            <button type="button" class="kb-key" data-key="K">K</button>
+            <button type="button" class="kb-key" data-key="L">L</button>
+          </div>
+          <div class="kb-row">
+            <button type="button" class="kb-key kb-action" data-key="DIR" aria-label="Toggle Direction">DIR</button>
+            <button type="button" class="kb-key" data-key="Z">Z</button>
+            <button type="button" class="kb-key" data-key="X">X</button>
+            <button type="button" class="kb-key" data-key="C">C</button>
+            <button type="button" class="kb-key" data-key="V">V</button>
+            <button type="button" class="kb-key" data-key="B">B</button>
+            <button type="button" class="kb-key" data-key="N">N</button>
+            <button type="button" class="kb-key" data-key="M">M</button>
+            <button type="button" class="kb-key kb-action" data-key="BACKSPACE" aria-label="Delete Letter">&#9003;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VAULT ARCHIVE SCREEN -->
+    <section id="screen-vault" class="screen screen-vault-wrap hidden" aria-label="Vault Archive">
+      <div class="panel-screen-inner">
+        <div class="subnav-header">
+          <button type="button" class="btn-subnav-back" id="btn-vault-back" aria-label="Back to Menu">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <span>Back</span>
+          </button>
+          <h2 class="subnav-title">Vault Archive</h2>
+          <div class="subnav-placeholder"></div>
+        </div>
+        <div class="vault-scroll-stage" id="vault-list"></div>
+      </div>
+    </section>
+
+    <!-- ERROR SCREEN -->
+    <section id="screen-error" class="screen screen-error-wrap hidden" aria-label="Error Screen">
+      <div class="error-card">
+        <h2 class="error-title">Puzzle Unavailable</h2>
+        <p class="error-desc" id="error-message">Unable to load crossword puzzle data. Please verify your connection.</p>
+        <button type="button" class="menu-btn menu-btn-primary" id="btn-retry-load">
+          <span class="btn-inner"><span class="btn-text">Retry</span></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- HOW TO PLAY PANEL (RIGHT-TO-LEFT SIDE-SHEET) -->
+    <div id="panel-howtoplay-overlay" class="panel-side-overlay hidden" aria-hidden="true">
+      <div class="panel-side-backdrop" id="panel-help-backdrop"></div>
+      <aside class="panel-side-sheet" id="panel-howtoplay" role="dialog" aria-modal="true" aria-labelledby="htp-title">
+        <header class="panel-side-header">
+          <h2 id="htp-title" class="panel-title">How to Play</h2>
+          <button type="button" class="btn-panel-close" id="btn-close-help" aria-label="Close How to Play">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </header>
+
+        <div class="panel-side-body">
+          <section class="htp-section">
+            <h3>Objective</h3>
+            <p>Fill every white cell with letters by solving the clues provided for each word. Dark cells separate words.</p>
+          </section>
+
+          <section class="htp-section">
+            <h3>Navigation & Selection</h3>
+            <p>Tap any cell to focus it. Tap the highlighted cell a second time or press the <strong>DIR</strong> button to toggle between <strong>Across</strong> and <strong>Down</strong>.</p>
+          </section>
+
+          <section class="htp-section">
+            <h3>Typing & Correction</h3>
+            <p>Type letters on your hardware keyboard or tap the touch keys. The cursor moves to the next square automatically. Press <strong>Backspace</strong> to erase.</p>
+          </section>
+
+          <section class="htp-section">
+            <h3>Daily Puzzles & Tiers</h3>
+            <p>Every day at midnight UK time, a fresh puzzle releases in <strong>Mini</strong>, <strong>Midi</strong>, and <strong>Main</strong> grid sizes. Revisit previous puzzles anytime via the <strong>Vault</strong>.</p>
+          </section>
+        </div>
+      </aside>
+    </div>
+
+    <!-- SETTINGS MODAL / CARD -->
+    <div id="modal-settings" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2 id="settings-title" class="modal-title">Settings</h2>
+          <button type="button" class="btn-panel-close" data-close="modal-settings" aria-label="Close Settings">&times;</button>
+        </div>
+        <div class="modal-content">
+          <div class="settings-row">
+            <div class="settings-info">
+              <span class="settings-label">Background Animation</span>
+              <span class="settings-subtext">Calm floating botanical atmosphere</span>
+            </div>
+            <div class="segmented-control" role="radiogroup" aria-label="Background Animation">
+              <button type="button" class="seg-btn" id="opt-anim-on" role="radio" aria-checked="true">On</button>
+              <button type="button" class="seg-btn" id="opt-anim-off" role="radio" aria-checked="false">Off</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAYER STATS MODAL -->
+    <div id="modal-stats" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="stats-title">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2 id="stats-title" class="modal-title">Player Statistics</h2>
+          <button type="button" class="btn-panel-close" data-close="modal-stats" aria-label="Close Statistics">&times;</button>
+        </div>
+        <div class="modal-content">
+          <div class="stats-grid-cards">
+            <div class="stat-box"><span class="stat-val" id="stat-played">0</span><span class="stat-lbl">Played</span></div>
+            <div class="stat-box"><span class="stat-val" id="stat-solved">0</span><span class="stat-lbl">Solved</span></div>
+            <div class="stat-box"><span class="stat-val" id="stat-streak">0</span><span class="stat-lbl">Streak</span></div>
+            <div class="stat-box"><span class="stat-val" id="stat-best">0</span><span class="stat-lbl">Best</span></div>
+          </div>
+          <h3 class="stats-breakdown-heading">Median Solve Times</h3>
+          <ul class="stats-tier-records" id="stats-tier-times"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VICTORY MODAL -->
+    <div id="modal-victory" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="victory-title">
+      <div class="modal-card victory-card">
+        <div class="victory-checkmark-badge" aria-hidden="true">&#x2713;</div>
+        <h2 id="victory-title" class="modal-title">Puzzle Complete!</h2>
+        <p id="victory-summary-text" class="victory-msg">Solved in 00:00</p>
+        <div class="victory-btn-group">
+          <button type="button" class="menu-btn menu-btn-primary" id="btn-victory-action">
+            <span class="btn-inner"><span class="btn-text">Next Puzzle</span></span>
+          </button>
+          <button type="button" class="menu-btn menu-btn-secondary" data-close="modal-victory">
+            <span class="btn-inner"><span class="btn-text">Review Grid</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast-message" class="toast-bubble hidden" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
