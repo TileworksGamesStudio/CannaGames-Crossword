@@ -10,9 +10,9 @@
 
   // Config & Constants
   const CSV_DATA_PATH = './puzzles.csv';
-  const STORAGE_KEY_NAMESPACE = 'crossword_game_universal_v1';
+  const STORAGE_KEY_NAMESPACE = 'cannacrossword_game_universal_v1';
   const TIME_API_ENDPOINT = 'https://worldtimeapi.org/api/timezone/Europe/London';
-  const HOME_PAGE_URL = '#'; // Project owner external portal placeholder
+  const HOME_PAGE_URL = 'https://tileworksgamesstudio.github.io/CannaGames-Home/'; // Project owner external portal placeholder
 
   // Exact Verbatim Cannabis Leaf Graphic Asset (Section 8 Mandate)
   const CANNABIS_LEAF_SVG = `<svg xmlns="http://w3.org" viewBox="0 0 512 546" width="512" height="546">
